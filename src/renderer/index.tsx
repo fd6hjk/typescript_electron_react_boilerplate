@@ -4,4 +4,4 @@ import ReactDOM from "react-dom";
 
 const root = document.getElementById("root");
 
-ReactDOM.render(<div>ewqweq</div>, root);
+ReactDOM.render(<div>ewqweqww</div>, root);

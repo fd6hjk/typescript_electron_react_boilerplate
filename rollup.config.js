@@ -4,6 +4,8 @@ import commonjs from "@rollup/plugin-commonjs";
 import copy from "rollup-plugin-copy";
 import replace from "@rollup/plugin-replace";
 import babel from "@rollup/plugin-babel";
+import serve from "rollup-plugin-serve";
+import livereload from "rollup-plugin-livereload";
 
 export default [
   {
@@ -11,20 +13,22 @@ export default [
     output: {
       dir: "./dist/main",
       format: "cjs",
+      sourcemap: true
     },
     plugins: [
       commonjs({
         include: "./node_modules/**"
       }),
-      nodeResolve(),
-      typescript()
+      typescript({
+      })
     ]
   },
   {
     input: "./src/renderer/index.tsx",
     output: {
       dir: "./dist/renderer",
-      format: "iife"
+      format: "iife",
+      sourcemap: true
     },
     plugins: [
       commonjs({
@@ -38,16 +42,24 @@ export default [
       }),
       nodeResolve(),
       replace({
-        'process.env.NODE_ENV': JSON.stringify( 'development' )
+        'process.env.NODE_ENV': JSON.stringify( 'development' ),
+        preventAssignment: true
       }),
       typescript({
-        module: "es2015"
+        moduleResolution: "classic"
       }),
       copy({
         targets: [
           { src: "./src/renderer/public/**/*", dest: "./dist/renderer/public"}
         ]
-      })
+      }),
+      serve({
+        verbose: true,
+        contentBase: ["./dist/renderer", "./dist/renderer/public"],
+        host: "localhost",
+        port: 3000,
+      }),
+      livereload({ watch: "dist/renderer" }),
     ]
   }
 ]
