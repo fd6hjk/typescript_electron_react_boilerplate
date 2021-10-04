@@ -24,6 +24,7 @@
     "concurrently": "^6.2.2",
     "electron": "^15.0.0",
     "electron-reload": "^2.0.0-alpha.1",
+    "rollup": "^2.58.0",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-livereload": "^2.0.5",
     "rollup-plugin-serve": "^1.1.0",
