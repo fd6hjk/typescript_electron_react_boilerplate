@@ -19,7 +19,9 @@ export default [
       commonjs({
         include: "./node_modules/**"
       }),
+      nodeResolve(),
       typescript({
+        module: "commonjs"
       })
     ]
   },
